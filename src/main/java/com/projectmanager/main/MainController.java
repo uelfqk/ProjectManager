@@ -13,7 +13,7 @@ public class MainController {
         return "sign-in";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public String submitLogin() {
         return "redirect:/";
     }
