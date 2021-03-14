@@ -19,6 +19,8 @@ import javax.validation.Valid;
 public class AccountController {
 
     private final AccountRepository accountRepository;
+    private final AccountService accountService;
+
     private final SignUpFormValidator signUpFormValidator;
 
     @InitBinder("singUpForm")
@@ -34,12 +36,11 @@ public class AccountController {
 
     @PostMapping("/sign-up")
     public String submitSignUp(@Valid @ModelAttribute SignUpForm signUpForm, Errors errors, Model model) {
-        System.out.println("!!!!");
-
         if(errors.hasErrors()) {
             return "account/sign-up";
         }
 
+        accountService.joinedNewAccount(signUpForm);
         return "main-form";
     }
 }

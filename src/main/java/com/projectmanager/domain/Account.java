@@ -17,7 +17,17 @@ public class Account {
     private Long id;
 
     @Column(unique = true)
-    private String userId;
+    private String username;
 
     private String password;
+
+    private String authority;
+
+    public static Account createAccount(String username, String password, String authority) {
+        Account account = new Account();
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setAuthority(authority);
+        return account;
+    }
 }
