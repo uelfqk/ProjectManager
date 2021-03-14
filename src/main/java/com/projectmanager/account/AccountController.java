@@ -2,6 +2,7 @@ package com.projectmanager.account;
 
 import com.projectmanager.account.form.SignUpForm;
 import com.projectmanager.account.validator.SignUpFormValidator;
+import com.projectmanager.domain.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,6 @@ import javax.validation.Valid;
 @Controller
 @RequiredArgsConstructor
 public class AccountController {
-
-    private final AccountRepository accountRepository;
     private final AccountService accountService;
 
     private final SignUpFormValidator signUpFormValidator;
@@ -31,16 +30,17 @@ public class AccountController {
     @GetMapping("/sign-up")
     public String createSignupForm(Model model) {
         model.addAttribute("signUpForm", new SignUpForm());
-        return "account/sign-up";
+        return "accounts/sign-up";
     }
 
     @PostMapping("/sign-up")
     public String submitSignUp(@Valid @ModelAttribute SignUpForm signUpForm, Errors errors, Model model) {
         if(errors.hasErrors()) {
-            return "account/sign-up";
+            return "accounts/sign-up";
         }
 
-        accountService.joinedNewAccount(signUpForm);
-        return "main-form";
+        Account account = accountService.joinedNewAccount(signUpForm);
+        accountService.signIn(account);
+        return "redirect:/main-home";
     }
 }

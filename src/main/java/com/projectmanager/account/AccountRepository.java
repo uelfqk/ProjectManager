@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    boolean existsByUserId(String userId);
+    boolean existsByUsername(String username);
 
-    Optional<Account> findByUserId(String userId);
+    Optional<Account> findByUsername(String username);
 }

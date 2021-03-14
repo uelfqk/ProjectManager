@@ -17,4 +17,9 @@ public class MainController {
     public String submitLogin() {
         return "redirect:/";
     }
+
+    @GetMapping("/main-home")
+    public String mainHome() {
+        return "main-home";
+    }
 }

@@ -1,5 +1,6 @@
 package com.projectmanager.domain;
 
+import com.projectmanager.enums.AccountAuthority;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,10 @@ public class Account {
 
     private String password;
 
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private AccountAuthority authority;
 
-    public static Account createAccount(String username, String password, String authority) {
+    public static Account createAccount(String username, String password, AccountAuthority authority) {
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(password);
